@@ -1,0 +1,17 @@
+# Bazel output and temporary directories
+# Ignore all Bazel working directories
+bazel-*/       
+# Build artifacts
+bazel-bin/     
+# Intermediate outputs
+bazel-out/     
+# Test logs
+bazel-testlogs/ 
+
+# Bazel lock and local configuration files
+# Local Bazel configuration (user-specific)
+.bazelrc.user  
+
+# Optional: Any custom local files
+*.log          # Logs, if applicable
+*.tmp          # Temporary files
