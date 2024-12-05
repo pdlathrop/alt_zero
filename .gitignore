@@ -3,9 +3,8 @@
 bazel-*/
 bazel-*
 # Build artifacts
-bazel-bin/
 bazel-bin
-!bazel-bin/switch/test
+bazel-bin/
 # Intermediate outputs
 bazel-out/
 bazel-out
