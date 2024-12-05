@@ -5,6 +5,7 @@ bazel-*
 # Build artifacts
 bazel-bin/
 bazel-bin
+!bazel-bin/switch/test
 # Intermediate outputs
 bazel-out/
 bazel-out
