@@ -11,6 +11,7 @@ int main() {
     constexpr int input_pin_3 = 9;
 
     ProcessInterface process1({input_pin_1, input_pin_2, input_pin_3});
-    std::cout << "Hello, World! This is a message." << std::endl; 
+    process1.DumpProfile();
+    process1.Run();
     return 0; 
 }
