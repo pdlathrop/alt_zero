@@ -6,6 +6,12 @@
 
 #include "switch/process_interface.h"
 
+#ifdef __APPLE__
+#include "mock_pigpio.h"
+#else
+#include <pigpio.h>
+#endif
+
 ProcessInterface::ProcessInterface(std::vector<int> input_pins){
     input_pins_ = input_pins;
     wait_time_ = 0;
@@ -21,7 +27,7 @@ void ProcessInterface::Run(){
         //TODO
         pin_1_input = true;
         if(pin_1_input){
-            
+
         }
         std::cout << "wait time: " << wait_time_ << " \n";
 
