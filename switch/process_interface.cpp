@@ -13,12 +13,20 @@ ProcessInterface::ProcessInterface(std::vector<int> input_pins){
 
 void ProcessInterface::Run(){
     bool continue_running = true;
-    constexpr double wait_duration = 0.5;
-    constexpr double wait_threshold = 5.0;
+    constexpr double wait_duration = 0.1;
+    constexpr double wait_threshold = 10.0;
+    bool pin_1_input = false;
+
     while(continue_running){
+        //TODO
+        pin_1_input = true;
+        if(pin_1_input){
+            
+        }
+        std::cout << "wait time: " << wait_time_ << " \n";
+
         std::this_thread::sleep_for(std::chrono::duration<double>(wait_duration));
         wait_time_ += wait_duration;
-        std::cout << "wait time: " << wait_time_ << " \n";
         if(wait_time_ > wait_threshold){
             continue_running = false;
         }
