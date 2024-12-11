@@ -12,21 +12,29 @@
 #include <pigpio.h>
 #endif
 
-ProcessInterface::ProcessInterface(std::vector<int> input_pins){
-    input_pins_ = input_pins;
+ProcessInterface::ProcessInterface(std::vector<int> input_pins): input_pins_(input_pins){
     wait_time_ = 0;
 }
 
 void ProcessInterface::Run(){
+    // Initializations.
     bool continue_running = true;
     constexpr double wait_duration = 0.1;
-    constexpr double wait_threshold = 10.0;
-    bool pin_1_input = false;
+    constexpr double wait_threshold = 5.0;
+    if(gpioInitialise() < 0){
+        std::cerr << "Gpio initialization failed. " << std::endl;
+        return;
+    }
+    if(input_pins_.empty()){
+        std::cerr << "Input pins empty. " << std::endl;
+    }
+    gpioSetMode(input_pins_[0], PI_INPUT);
 
+    // Main loop.
     while(continue_running){
-        //TODO
-        pin_1_input = true;
-        if(pin_1_input){
+        // Read pins.
+        int main_pin_state = gpioRead(input_pins_[0]);
+        if(main_pin_state == 1){
 
         }
         std::cout << "wait time: " << wait_time_ << " \n";

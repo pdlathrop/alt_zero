@@ -5,7 +5,7 @@
 class ProcessInterface{
 private:
     float wait_time_;
-    std::vector<int> input_pins_;
+    const std::vector<int> input_pins_;
     void PrintVector(std::vector<int> input, std::string name);
 
 public:
