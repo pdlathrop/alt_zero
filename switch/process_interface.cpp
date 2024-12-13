@@ -28,14 +28,14 @@ void ProcessInterface::Run(){
     if(input_pins_.empty()){
         std::cerr << "Input pins empty. " << std::endl;
     }
-    gpioSetMode(input_pins_[0], PI_INPUT);
+    SetInputPins(input_pins_);
 
     // Main loop.
     while(continue_running){
         // Read pins.
         int main_pin_state = gpioRead(input_pins_[0]);
         if(main_pin_state == 1){
-
+            ExecuteGPIO2(input_pins_[1]);
         }
         std::cout << "wait time: " << wait_time_ << " \n";
 
@@ -45,6 +45,18 @@ void ProcessInterface::Run(){
             continue_running = false;
         }
     }
+}
+
+void ProcessInterface::SetInputPins(std::vector<int> pins) const{
+    for(auto pin: pins){
+        gpioSetMode(pin, PI_INPUT);
+    }
+    return;
+}
+
+void ProcessInterface::ExecuteGPIO2(int input_pin){
+    int pin_state = gpioRead(input_pin);
+    // do some stuff
 }
 
 void ProcessInterface::DumpProfile(){
