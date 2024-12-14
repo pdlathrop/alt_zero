@@ -35,7 +35,8 @@ void ProcessInterface::Run(){
         // Read pins.
         int main_pin_state = gpioRead(input_pins_[0]);
         if(main_pin_state == 1){
-            ExecuteGPIO2(input_pins_[1]);
+            std::cout << "main pin state pressed" << std::endl;
+            //ExecuteGPIO2(input_pins_[1]);
         }
         std::cout << "wait time: " << wait_time_ << " \n";
 
@@ -48,9 +49,11 @@ void ProcessInterface::Run(){
 }
 
 void ProcessInterface::SetInputPins(std::vector<int> pins) const{
-    for(auto pin: pins){
+    //for(auto pin: pins){
+    int pin = pins[0];
         gpioSetMode(pin, PI_INPUT);
-    }
+        gpioSetPullUpDown(pin, PI_PUD_DOWN);
+    //}
     return;
 }
 
