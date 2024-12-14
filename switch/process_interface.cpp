@@ -34,6 +34,7 @@ void ProcessInterface::Run(){
     while(continue_running){
         // Read pins.
         int main_pin_state = gpioRead(input_pins_[0]);
+        std::cout << "reading gpio pin:: " << input_pins_[0] << " as: " << main_pin_state << std::endl;
         if(main_pin_state == 1){
             std::cout << "main pin state pressed" << std::endl;
             //ExecuteGPIO2(input_pins_[1]);
