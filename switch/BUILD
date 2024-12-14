@@ -9,6 +9,9 @@ cc_library(
     srcs = ["process_interface.cpp"],
     hdrs = ["process_interface.h"],
     deps = ["mock_pigpio"],
+    linkopts = ["-lpigpio",  # Link pigpio
+        "-lrt",      # Link the real-time library (required by pigpio)
+    ],
 )
 
 cc_library(
