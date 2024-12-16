@@ -38,7 +38,7 @@ void ProcessInterface::Run(){
             std::cout << "main switch thrown" << std::endl;
             ProcessGPIO1(input_pins_[1]);
         }
-        // std::cout << "wait time: " << wait_time_ << " \n";
+        std::cout << "wait time: " << wait_time_ << " \n" << "main pin state = " << main_pin_state << std::endl;
 
         std::this_thread::sleep_for(std::chrono::duration<double>(wait_duration));
         wait_time_ += wait_duration;
@@ -46,6 +46,7 @@ void ProcessInterface::Run(){
             continue_running = false;
         }
     }
+    return;
 }
 
 void ProcessInterface::SetInputPins(std::vector<int> pins) const{
@@ -67,12 +68,12 @@ void ProcessInterface::ProcessGPIO1(int input_pin){
     return;
 }
 
-void ProcessInterface::DumpProfile(){
+void ProcessInterface::DumpProfile() const{
     std::cout << "Start DumpProfile, wait_time: " << wait_time_ << "\n";
     PrintVector(input_pins_, "input_pins_");
 }
 
-void ProcessInterface::PrintVector(std::vector<int> input, std::string name){
+void ProcessInterface::PrintVector(std::vector<int> input, std::string name) const{
     std::cout << name << ": ";
     for(int elem:input){
         std::cout << elem << ", ";
