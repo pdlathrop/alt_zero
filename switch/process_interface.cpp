@@ -20,7 +20,7 @@ void ProcessInterface::Run(){
     // Initializations.
     bool continue_running = true;
     constexpr double wait_duration = 0.1;
-    constexpr double wait_threshold = 5.0;
+    constexpr double wait_threshold = 100.0;
     if(gpioInitialise() < 0){
         std::cerr << "Gpio initialization failed. " << std::endl;
         return;
@@ -36,9 +36,9 @@ void ProcessInterface::Run(){
         int main_pin_state = gpioRead(input_pins_[0]);
         if(main_pin_state == 0){
             std::cout << "main switch thrown" << std::endl;
-            //ExecuteGPIO2(input_pins_[1]);
+            ProcessGPIO1(input_pins_[1]);
         }
-        std::cout << "wait time: " << wait_time_ << " \n";
+        // std::cout << "wait time: " << wait_time_ << " \n";
 
         std::this_thread::sleep_for(std::chrono::duration<double>(wait_duration));
         wait_time_ += wait_duration;
@@ -49,17 +49,22 @@ void ProcessInterface::Run(){
 }
 
 void ProcessInterface::SetInputPins(std::vector<int> pins) const{
-    //for(auto pin: pins){
-    int pin = pins[0];
+    for(auto pin: pins){
         gpioSetMode(pin, PI_INPUT);
         gpioSetPullUpDown(pin, PI_PUD_UP);
-    //}
+    }
     return;
 }
 
-void ProcessInterface::ExecuteGPIO2(int input_pin){
+void ProcessInterface::ProcessGPIO1(int input_pin){
     int pin_state = gpioRead(input_pin);
-    // do some stuff
+    if(pin_state == 0){
+        if(wait_time_ - toggle_1_mem_ >= toggle_1_cooldown_){
+            std::cout << "toggle switch 2 thrown and cooldown satisfied: wait_time_ = " << wait_time_ << "toggle_1_mem_ = " << toggle_1_mem_ << std::endl; 
+        }
+        toggle_1_mem_ = wait_time_;
+    }
+    return;
 }
 
 void ProcessInterface::DumpProfile(){

@@ -8,9 +8,9 @@
 int main() {
     constexpr int input_pin_1 = 4;
     constexpr int input_pin_2 = 5;
-    constexpr int input_pin_3 = 6;
+    // constexpr int input_pin_3 = 6;
 
-    ProcessInterface process1({input_pin_1, input_pin_2, input_pin_3});
+    ProcessInterface process1({input_pin_1, input_pin_2});
     process1.DumpProfile();
     process1.Run();
     return 0; 
