@@ -50,10 +50,11 @@ void ProcessInterface::Run(){
 }
 
 void ProcessInterface::SetInputPins(std::vector<int> pins) const{
-    for(auto pin: pins){
+    //for(auto pin: pins){
+    int pin = pins[0];
         gpioSetMode(pin, PI_INPUT);
         gpioSetPullUpDown(pin, PI_PUD_UP);
-    }
+    //}
     return;
 }
 
